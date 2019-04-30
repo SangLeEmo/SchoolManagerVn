@@ -9,6 +9,7 @@ namespace QLGV_2019.Models
     {
         public string id_login { get; set; }
         public int yearSt { get; set; }
+        public string specialize { get; set; }
         public string password { get; set; }
         public bool active { get; set; }
     }
