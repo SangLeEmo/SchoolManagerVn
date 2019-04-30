@@ -1,0 +1,89 @@
+﻿@using QLGV_2019.Models
+@{
+    ViewBag.Title = "CreateClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container text-center">
+    <h3>Create Class</h3>
+    <br />
+    <form action="~/Subject/CreateClass" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-3" >Mã Lớp:</label>
+            <div class="col-sm-7">
+                <input type="text" name="Id" value="" placeholder="Mã Lớp" class="form-control" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Tên Lớp:</label>
+            <div class="col-sm-7">
+                <input type="text" name="Name" value="" placeholder="Tên Lớp" class="form-control" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">chuyên Ngành:</label>
+            <div class="col-sm-7">
+                <select name="Name_Specialized" class="form-control" required>
+                    <option value=""></option>
+                    @if(ViewBag.nganh != null)
+                    {
+                        foreach(var item in ViewBag.Nganh)
+                        {
+                            <option value="@item.name">@item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Sĩ Số:</label>
+            <div class="col-sm-1">
+                <select class="form-control text-center" name="Numb_Student" required>
+                    <option value=""></option>
+                    @for (int i = 40; i <= 80; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" name="name" value="Create" />
+    </form>
+</div>
+<hr />
+<div class="container text-center">
+    <h3>Class List</h3>
+    <br />
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Mã Lớp</th>
+            <th>Tên Lớp</th>
+            <th>Chuyên Ngành</th>
+            <th>Sĩ Số</th>
+            <th>Thao Tác</th>
+        </tr>
+        @if(ViewBag.Lop != null)
+        {
+            foreach(KeyValuePair<Class, Specialized> item in ViewBag.Lop)
+            {
+                <tr>
+                    <td>@item.Key.id</td>
+                    <td>@item.Key.name</td>
+                    <td>@item.Value.name</td>
+                    <td>@item.Key.numb_student</td>
+                    <td>
+                        <a href="#" class="btn btn-warning">Update</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,194 @@
+﻿@using QLGV_2019.Models;
+@{
+    ViewBag.Title = "CreateSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container text-center" >
+    <h3>Create Subject</h3>
+    <form action="~/Subject/Createsubject" method="post" class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Mã Môn Học</span>
+                    <input class="form-control" type="text" name="Id" value="" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Tên Môn Học</span>
+                    <input class="form-control" type="text" name="Sub_Name" value="" required/>
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-4">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Ngành</span>
+                    <select class="form-control" name="Major_Name" required>
+                        <option value=""></option>
+                        @if (ViewBag.Nganh != null)
+                        {
+                            foreach (var item in ViewBag.Nganh)
+                            {
+                                <option value="@item.name">@item.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Số Tín Chỉ</span>
+                    <input class="form-control" type="number" name="Numb_Credit" value="" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Tiết Lý Thuyết</span>
+                    <input class="form-control" type="number" name="Numb_Theory" value="" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-4">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Chuyên Ngành</span>
+                    <select class="form-control" name="Specialized_Name" required>
+                        <option value=""></option>
+                        @if (ViewBag.ChuyenNganh != null)
+                        {
+                            foreach (var item in ViewBag.ChuyenNganh)
+                            {
+                                <option value="@item.name">@item.name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Tiết Thực Hành</span>
+                    <input class="form-control" type="number" name="Numb_Practice" value="" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Hệ Số Lý Thuyết</span>
+                    <input class="form-control" type="number" name="Theory_Percent" value="" step="any" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Số Lượng</span>
+                    <select name="Numb_Student" required class="form-control">
+                        <option value=""></option>
+                        @for(int i = 40; i <= 80; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Lớp</span>
+                    <select class="form-control" name="Class_Name">
+                        <option value=""></option>
+                        @if(ViewBag.Lop != null)
+                        {
+                            foreach(var item in ViewBag.Lop)
+                            {
+                                <option value="@item.id">@item.id</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Giảng Viên</span>
+                    <select class="form-control" name="Teacher_Name">
+                        <option value=""></option>
+                        @if (ViewBag.GV != null)
+                        {
+                            foreach (var item in ViewBag.GV)
+                            {
+                                <option value="@item.id">@item.last_name @item.first_name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <input type="submit" name="name" value="Create" class="btn btn-info" />
+        <input type="reset" name="name" value="Clear" class="btn btn-info" />
+    </form>
+</div>
+<hr />
+<hr />
+<div class="container text-center">
+    <h3>Subject List</h3>
+    <br />
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Mã Môn Học</th>
+            <th>Tên Môn Học</th>
+            <th>Lớp</th>
+            <th>Chuyên Ngành</th>
+            <th>Giảng Viên</th>
+            <th>Số Tín Chỉ</th>
+            <th>Tiết Lý Thuyết</th>
+            <th>Tiết Thực Hành</th>
+            <th>Hệ Số Lý Thuyết</th>
+            <th>Sĩ Số</th>
+        </tr>
+        @if(ViewBag.MH != null)
+        {
+            List<Tuple<Class, Subject, Specialized, Major, Teacher>> tmp = ViewBag.MH;
+            for(int i = 0; i < tmp.Count; i++)
+            {
+                <tr>
+                    <td>@tmp[i].Item2.id</td>
+                    <td>@tmp[i].Item2.sub_name</td>
+                    <td>@tmp[i].Item1.id</td>
+                    <td>@tmp[i].Item3.name</td>
+                    <td>@tmp[i].Item5.last_name @tmp[i].Item5.first_name</td>
+                    <td>@tmp[i].Item2.numb_credit</td>
+                    <td>@tmp[i].Item2.numb_theory</td>
+                    <td>@tmp[i].Item2.numb_practice</td>
+                    <td>@tmp[i].Item2.theory_percent</td>
+                    <td>@tmp[i].Item2.numb_student</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

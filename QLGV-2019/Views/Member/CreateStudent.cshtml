@@ -1,0 +1,179 @@
+﻿@using QLGV_2019.Models;
+@{
+    ViewBag.Title = "CreateStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/teacher.js"></script>
+
+
+<div class="container text-center">
+    <h3>Create Student</h3>
+    <br />
+    <form action="~/Member/CreateStudent" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                ID Student:
+            </label>
+            <div class="col-sm-3">
+                <select name="Id" class="form-control" onclick="fill_in_form()" id="Id">
+                    <option value=""></option>
+                    @if (ViewBag.Account != null)
+                    {
+                        foreach (var item in ViewBag.Account)
+                        {
+                            <option value="@item.id_number">@item.id_number</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                First Name:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="First_Name" class="form-control" value="" id="First_Name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Last Name:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="Last_Name" class="form-control" value="" id="Last_Name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Ngành:
+            </label>
+            <div class="col-sm-3">
+                <select class="form-control" name="Major_Name" id="Major_Name">
+                    <option value=""></option>
+                    @if (ViewBag.Nganh != null)
+                    {
+                        foreach (var item in ViewBag.Nganh)
+                        {
+                            <option value="@item.name">@item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Chuyên Ngành:
+            </label>
+            <div class="col-sm-3">
+                <select class="form-control" name="Specialized_Name">
+                    <option value=""></option>
+                    @if(ViewBag.ChuyenNganh != null)
+                    {
+                        foreach(var item in ViewBag.ChuyenNganh)
+                        {
+                            <option value="@item.">@item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Lớp:</label>
+            <div class="col-sm-3">
+                <select name="Class_Name" class="form-control">
+                    <option value=""></option>
+                    @if (ViewBag.Lop != null)
+                    {
+                        foreach (var item in ViewBag.Lop)
+                        {
+                            <option value="@item.id">@item.id</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Date:
+            </label>
+            <div class="col-sm-3">
+                <input type="date" name="Date_Of_Birth" class="form-control" value="" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Phone:
+            </label>
+            <div class="col-sm-6">
+                <input type="number" name="Phone" class="form-control" value="" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Email:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="Email" class="form-control" value="" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">
+                Address:
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="Address" class="form-control" value="" />
+            </div>
+        </div>
+
+        <input type="submit" name="name" value="Create" class="btn btn-info" />
+    </form>
+</div>
+
+<hr />
+<div class="container text-center">
+    <h3>Student List</h3>
+    <br />
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>Mã Sinh Viên</th>
+            <th>Họ Và Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Địa Chỉ</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Khoa</th>
+            <th>Chuyên Ngành</th>
+            <th>Lớp</th>
+        </tr>
+        @if(ViewBag.SV != null)
+        {
+            List<Tuple<Student, Major, Specialized, Class>> tmp = ViewBag.SV;
+            for(int i = 0; i < tmp.Count; i++)
+            {
+                <tr>
+                    <td>@tmp[i].Item1.id</td>
+                    <td>@tmp[i].Item1.last_name @tmp[i].Item1.first_name</td>
+                    <td>@tmp[i].Item1.date_of_birth</td>
+                    <td>@tmp[i].Item1.address</td>
+                    <td>@tmp[i].Item1.email</td>
+                    <td>@tmp[i].Item1.phone</td>
+                    <td>@tmp[i].Item2.name</td>
+                    <td>@tmp[i].Item3.name</td>
+                    <td>@tmp[i].Item4.id</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

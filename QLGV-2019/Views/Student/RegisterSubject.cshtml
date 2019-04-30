@@ -1,0 +1,67 @@
+﻿@using QLGV_2019.Models;
+@{
+    ViewBag.Title = "RegisterSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container text-center">
+    <h3>List Subject</h3>
+    <br />
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th class="text-center">Mã Môn Học</th>
+            <th class="text-center">Tên Môn Học</th>
+            <th class="text-center">Lớp</th>
+            <th class="text-center">Giảng Viên</th>
+            <th class="text-center">Số Lượng</th>
+            <th class="text-center">Thao Tác</th>
+        </tr>
+        @if(ViewBag.MH != null)
+        {
+            List<Tuple<Class, Subject, Specialized, Major, Teacher>> item = ViewBag.MH;
+            for(int i = 0; i < item.Count; i++)
+            {
+                <tr>
+                    <td id="Id_Subject">@item[i].Item2.id</td>
+                    <td id="Subject_Name">@item[i].Item2.sub_name</td>
+                    <td id="Id_Class">@item[i].Item1.id</td>
+                    <td id="Full_Name">@item[i].Item5.last_name @item[i].Item5.first_name</td>
+                    <td>@item[i].Item2.numb_student</td>
+                    <td>
+                        <form action="~/Student/RegisterSubject" method="post">
+                            <input type="hidden"  name="Id_Class" value="@item[i].Item1.id" />
+                            <input type="hidden"  name="Id_Subject" value="@item[i].Item2.id" />
+                            <input type="hidden"  name="Id_Teacher" value="@item[i].Item5.id" />
+                            <input type="submit" name="name" value="Chọn" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+<div class="container text-center">
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th class="text-center">Mã Môn Học</th>
+            <th class="text-center">Tên Môn Học</th>
+            <th class="text-center">Lớp</th>
+            <th class="text-center">Giảng Viên</th>
+        </tr>
+        @if(ViewBag.DK != null)
+        {
+            List<Tuple<Student, RegisterSubject, string, string>> item = ViewBag.DK;
+            for(int i = 0; i < item.Count; i++)
+            {
+                <tr>
+                    <td>@item[i].Item2.id_class</td>
+                    <td>@item[i].Item4</td>
+                    <th>@item[i].Item2.id_class</th>
+                    <th>@item[i].Item3</th>
+                </tr>
+            }
+        }
+    </table>
+</div>

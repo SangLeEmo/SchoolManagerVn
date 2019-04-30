@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "AllSchoolYear";
+}
+
+<h2 class="text-center">AllSchoolYear</h2>
+
+<div class="row">
+    <button class="col-lg-3 col-md-12  btn btn-success" style="width: 20em;"><i class="glyphicon glyphicon-plus"></i> Thêm</button>
+
+    <div class="pull-right col-lg-6 col-md-12 input-group" style="width: 40em;">
+        <input type="text" class="form-control" placeholder="Tìm kiếm...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i>Tìm</button>
+        </span>
+    </div>
+
+</div>
+<hr />
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+            <th>YEAR</th>
+            <th>ACTION</th>
+        </tr>
+        @if (ViewBag.Year != null)
+        {
+            foreach (var item in ViewBag.Year)
+            {
+                <tr>
+                    <td>@item.school_year</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Home/UpdateSchoolYear?school_year=@item.school_year">Update</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+

@@ -1,0 +1,121 @@
+﻿@using QLGV_2019.Models;
+@{
+    ViewBag.Title = "CreateTranscript";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/teacher.js"></script>
+
+<div class="container text-center">
+    <h3>Create Transcript</h3>
+    <br />
+    <form action="~/Member/CreateTranscript" method="post" class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Mã Bảng Điểm</span>
+                    <select class="form-control" name="Id" value="" id="Id" onclick="fill_in_mark()" required>
+                        <option value=""></option>
+                        @if(ViewBag.MH != null)
+                        {
+                            foreach(var item in ViewBag.MH)
+                            {
+                                <option value="@item.id" >@item.id</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Tên Môn Học</span>
+                    <input class="form-control" type="text" name="Subject_Name" id="Subject_Name" value="" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Mã Sinh Viên</span>
+                    <select name="Student_Id" value="" class="form-control" required >
+                        <option value=""></option>
+                        @if(ViewBag.SV != null)
+                        {
+                            foreach(var item in ViewBag.SV)
+                            {
+                                <option value="@item.id" >@item.id</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Điểm Lý Thuyết</span>
+                    <input class="form-control" type="number" name="Mark_Theory" value="" step="any" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Điểm Thực Hành</span>
+                    <input class="form-control" type="number" name="Mark_Practice" value="" step="any" required />
+                </div>
+            </div>
+
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Điểm Trung Bình</span>
+                    <input class="form-control" type="number" name="Mark_Average" value="" step="any" required />
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="name" value="Create" class="btn btn-info" />
+        <input type="reset" name="name" value="Clear" class="btn btn-info" />
+    </form>
+</div>
+
+<div class="container text-center">
+    <h3>List Transcript</h3>
+    <br />
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>Mã Môn Học</th>
+            <th>Tên Môn Học</th>
+            <th>Mã Sinh Viên</th>
+            <th>Điểm Lý Thuyết</th>
+            <th>Điểm Thực Hành</th>
+            <th>Điểm Trung Bình</th>
+        </tr>
+        @if(ViewBag.Mark != null)
+        {
+            List<Tuple<RegSectorSubject, Subject, Student>> item = ViewBag.Mark;
+            for(int i = 0; i < item.Count; i++)
+            {
+                <tr>
+                    <td>@item[i].Item2.id</td>
+                    <td>@item[i].Item2.sub_name</td>
+                    <td>@item[i].Item3.id</td>
+                    <td>@item[i].Item1.mark_theory</td>
+                    <td>@item[i].Item1.mark_practice</td>
+                    <td>@item[i].Item1.mark_average</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+
+

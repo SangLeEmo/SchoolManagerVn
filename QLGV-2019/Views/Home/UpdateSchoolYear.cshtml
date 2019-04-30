@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "UpdateSchoolYear";
+}
+
+<h2 class="text-center">UpdateSchoolYear</h2>
+
+<div>
+
+    <hr />
+    <form action="~/Home/UpdateSchoolYear" method="post" class="form-horizontal">
+        <input type="hidden" name="Id" value="a" />
+        <div class="form-group">
+            <label class="control-label">YEAR: </label>
+            <input class="form-control" type="number" name="nam_hoc" value="@ViewBag.Year.school_year" />
+        </div>
+        <div>
+            <input type="submit" name="name" value="Update" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+

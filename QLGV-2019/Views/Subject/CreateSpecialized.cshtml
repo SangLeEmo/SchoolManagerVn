@@ -1,0 +1,115 @@
+﻿@using QLGV_2019.Models
+@{
+    ViewBag.Title = "CreateSpecialized";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container text-center">
+    <div class="col-sm-4">
+        <div>
+            <h3>Create Major</h3>
+            <br />
+            <form action="~/Subject/CreateMajor" method="post" class="form-inline">
+                <div class="form-group">
+                    <label>Tên Ngành:</label>
+                    <input class="form-control" type="text" name="Major_Name" value="" placeholder="Tên Ngành" required />
+                </div>
+                <input type="submit" name="name" value="Create" class="btn btn-default" />
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7">
+        <div>
+            <h3>Create Specialized</h3>
+            <br />
+            <form action="~/Subject/CreateSpecialized" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Mã Chuyên Ngành:</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="Id" value="" class="form-control" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Tên Ngành:</label>
+                    <div class="col-sm-6">
+                        <select name="Major_Name" class="form-control" required>
+                            <option value=""></option>
+                            @if (ViewBag.Nganh != null)
+                            {
+                                foreach (var item in ViewBag.Nganh)
+                                {
+                                    <option value="@item.name">@item.name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Tên Chuyên Ngành:</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="Specialized_Name" value="" class="form-control" required />
+                    </div>
+                </div>
+                <input type="submit" name="name" value="Create" class="btn btn-default" />
+            </form>
+        </div>
+    </div>
+
+</div>
+<hr />
+
+<div class="container text-center">
+    <br />
+    <h3>Major List</h3>
+    <br />
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Tên Ngành</th>
+            <th>Thao Tác</th>
+        </tr>
+        @if (ViewBag.Nganh != null)
+        {
+            foreach (var item in ViewBag.Nganh)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>
+                        <a href="#" class="btn btn-warning">Update</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<hr />
+<div class="container text-center">
+    <br />
+    <h3>Specialized List</h3>
+    <br />
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>Mã Ngành</th>
+            <th>Tên Ngành</th>
+            <th>Tên Chuyên Ngành</th>
+            <th>Thao Tác</th>
+        </tr>
+        @if (ViewBag.Node != null)
+        {
+            foreach (KeyValuePair<Specialized, Major> item in ViewBag.Node)
+            {
+                <tr>
+                    <td>@item.Key.id</td>
+                    <td>@item.Value.name</td>
+                    <td>@item.Key.name</td>
+                    <td>
+                        <a href="#" class="btn btn-warning">Update</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

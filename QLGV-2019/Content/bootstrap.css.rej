@@ -1,0 +1,10 @@
+diff a/QLGV-2019/Content/bootstrap.css b/QLGV-2019/Content/bootstrap.css	(rejected hunks)
+@@ -2463,7 +2463,7 @@
+     white-space: nowrap;
+   }
+   .table-responsive > .table-bordered {
+-    border: 0;
++    border:solid;
+   }
+   .table-responsive > .table-bordered > thead > tr > th:first-child,
+   .table-responsive > .table-bordered > tbody > tr > th:first-child,

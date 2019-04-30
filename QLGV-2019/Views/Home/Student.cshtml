@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+        <div style="text-align:center">
+            <h2>Danh sách giảng viên</h2>
+        </div>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="search">Tra cứu sinh viên:</label>
+                <input type="search" class="form-control" id="Search" placeholder="Vidu:201801...">
+            </div>
+            <button type="submit" class="btn btn-info">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+        <table class="table table-striped table-dark">
+            <thead class="alert alert-info">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã số sinh viên</th>
+                    <th>Lớp</th>
+                    <th>Khoa</th>
+                    <th>Họ và tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Quê quán</th>
+                    <th>Liên lạc</th>
+                    <th>Niên khóa</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>16DH110262</td>
+                    <td>PM1604</td>
+                    <td>CNTT</td>
+                    <td>Nguyễn Khá Bảnh</td>
+                    <td>17/05/1998</td>
+                    <td>Hồ chí minh</td>
+                    <td>BanhTon@Gmail.com</td>
+                    <td>2016-2020</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <div class="Measure">
+            <button type="submit" class="btn btn-warning">
+                <span class="glyphicon glyphicon-wrench"></span> Sửa
+            </button>
+            <button type="submit" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span> Xóa
+            </button>
+        </div>
+
+    </div>
+    <div class="container">
+        <h2>Thêm sinh viên mới</h2>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Mã số sinh viên <span class="glyphicon glyphicon-user"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="idGV" placeholder="Nhập mã giảng viên" name="idgv">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Lớp <span class="glyphicon glyphicon-th-list"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="classes" placeholder="Nhập lớp cố vấn" name="classes">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Khoa <span class="glyphicon glyphicon-briefcase"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="faculty" placeholder="Nhập khoa" name="faculty">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Họ và tên <span class="glyphicon glyphicon-pencil"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ngày sinh <span class="glyphicon glyphicon-gift"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="bDay" placeholder="Nhập ngày sinh" name="bDay">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Quê quán <span class="glyphicon glyphicon-tree-conifer"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="POB" placeholder="Nhập quê quán" name="POB">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Liên lạc <span class="glyphicon glyphicon-earphone"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="contact" placeholder="Nhập địa chỉ liên lạc" name="contact">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Niên khóa <span class="glyphicon glyphicon-calendar"></span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="year" placeholder="Nhập niên khóa" name="year">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="confirm">Xác nhận thông tin trên chính xác</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-info">
+                        <span class="glyphicon glyphicon-user"></span> Thêm
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+ 
