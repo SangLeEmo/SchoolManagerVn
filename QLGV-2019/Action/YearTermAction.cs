@@ -11,15 +11,11 @@ namespace QLGV_2019.Action
     public class YearTermAction
     {
         /* CREATE */
-        public static void Add_Year_Term(int School_Year, int Year_Term, string Day_Start, string Day_End)
+        public static void Add_Year_Term(int Year_Term, string Day_Start, string Day_End)
         {
             var client = ConnectNeo4J.Connection();
             var tmp = new YearTerm {year_term = Year_Term, day_start = Day_Start, day_end = Day_End, isDelete = false };
-            client.Cypher.Create("(:Year_Term {year_term})").WithParam("year_term", tmp).ExecuteWithoutResultsAsync().Wait();
-            client.Cypher.Match("(a:Year_Term)", "(b:School_Year)").
-                Where((YearTerm a) => a.year_term == Year_Term).
-                AndWhere((SchoolYear b) => b.school_year == School_Year).
-                Create("(a)-[:In_Year]->(b)").ExecuteWithoutResults();
+            client.Cypher.Create("(:YearTerm {year_term})").WithParam("year_term", tmp).ExecuteWithoutResultsAsync().Wait();
         }
 
         /* UPDATE */
@@ -35,18 +31,18 @@ namespace QLGV_2019.Action
         //}
 
         /* SEARCH */
-        public static YearTerm Find(int Id)
+        public static List<YearTerm> Find(int Id)
         {
             var client = ConnectNeo4J.Connection();
-            var term = client.Cypher.Match("(a:Year_Term)").Where("a.year_term = {ID}").WithParam("ID", Id).Return<YearTerm>("a").Results.SingleOrDefault();
+            var term = client.Cypher.Match("(a:YearTerm)").Where("a.year_term = {ID}").WithParam("ID", Id).Return<YearTerm>("a").Results.ToList();
             return term;
         }
 
         /* GET ALL */
-        public static List<YearTerm> ShowAll()
+        public static List<YearTerm> GetAll()
         {
             var client = ConnectNeo4J.Connection();
-            var term = client.Cypher.Match("(a:Year_Term)").Return<YearTerm>("a").Results.ToList();
+            var term = client.Cypher.Match("(a:YearTerm)").Return<YearTerm>("a").Results.ToList();
             return term;
         }
 

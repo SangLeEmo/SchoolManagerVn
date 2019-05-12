@@ -7,9 +7,14 @@ namespace QLGV_2019.Models
 {
     public class Teacher
     {
-        public string id_login { get; set; }
+        public string id { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string date_of_birth { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string address { get; set; }
         public string degree { get; set; }
-        public string password { get; set; }
-        public bool active { get; set; }
+        public string status { get; set; }
     }
 }

@@ -7,7 +7,6 @@ namespace QLGV_2019.Models
 {
     public class YearTerm
     {
-       
         public int year_term { get; set; }
         public string day_start { get; set; }
         public string day_end { get; set; }

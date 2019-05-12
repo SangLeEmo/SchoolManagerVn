@@ -8,69 +8,37 @@ using System.Text;
 using System.Security.Cryptography;
 
 namespace QLGV_2019.Controllers
-{
-    
+{    
     public class AccountController : Controller
     {
-        public static string MD5Hash(string text)//Ma hoa MD5
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-
-            //compute hash from the bytes of text  
-            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
-
-            //get hash result after compute it  
-            byte[] result = md5.Hash;
-
-            StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < result.Length; i++)
-            {
-                //change it into 2 hexadecimal digits  
-                //for each byte  
-                strBuilder.Append(result[i].ToString("x2"));
-            }
-
-            return strBuilder.ToString();
-        }
-
+      
         // GET: Account
         public ActionResult Index()
         {
             return View();
         }
 
+
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+        //    if (Session["id"] != null && (string)Session["role"] == "Admin")
+                return View();
+            //else
+            //    return Redirect("~/Home/Index");
         }
 
         [HttpPost]
-        public ActionResult RegisterUser(string Id_login, string Last_Name, string First_Name, string Password, string Role)
+        public ActionResult RegisterUser(string Id_Number, string Last_Name, string First_Name, string Password, string Role)
         {
-            string passMD5 = MD5Hash(Password);
-            UserAction.Add_User(Last_Name, First_Name, Role, passMD5, );
-            if (Role == "Admin")
-            {
-                { Id_login, Password, true };
-                client.Cypher.Create("(:Admin {admin})").WithParam("admin", admin).ExecuteWithoutResultsAsync().Wait();
-            }
-            else if (Role == "Teacher")
-            {
-                var teacher = new Teacher { id_login = Id_login, password = Password, active = true };
-                client.Cypher.Create("(:Teacher {teacher})").WithParam("teacher", user).ExecuteWithoutResultsAsync().Wait();
-            }
-            else if (Role == "Student")
-            {
-                var student = new Student { id_login = Id_login, password = Password, active = true };
-                client.Cypher.Create("(:Student {user})").WithParam("student", user).ExecuteWithoutResultsAsync().Wait();
-            }
+            UserAction.Add_User(Id_Number, Last_Name, First_Name, Password, Role);
             return Redirect("~/");
         }
 
         [HttpPost]
         public ActionResult Login(string Id_Number, string Password)
         {
+            
             if (UserAction.CheckLogin(Id_Number, Password) != null)
             {
                 var user = UserAction.Find(Id_Number);
@@ -82,7 +50,6 @@ namespace QLGV_2019.Controllers
             }
             else
             {
-                //Response.Write("<script>alert('Sai tài khoản hoặc mật khẩu !')</script>"); // thông báo lên html
                 return Redirect("~/");
             }
         }
@@ -95,6 +62,25 @@ namespace QLGV_2019.Controllers
                 Session["id"] = null;
             }
             return Redirect("~/");
+        }
+
+        [HttpGet]
+        public ActionResult UpdateInfo()
+        {
+            if (Session["id"] != null)
+            {
+                ViewBag.Info = UserAction.Find((string)Session["id"]);
+                return View();
+            }
+            else
+                return Redirect("~/Home/Index");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateInfo(string Password)
+        {
+            UserAction.Edit_User((string)Session["id"], Password);
+            return Redirect("~/Account/UpdateInfo");
         }
 
     }

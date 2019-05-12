@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "UpdateInfo";
+}
+
+<script src="~/Scripts/teacher.js"></script>
+
+<div class="container text-center">
+    <br />
+    <h3>Cập Nhật Thông Tin</h3>
+    <br />
+    <form  action="~/Account/UpdateInfo" method="post" class="form-horizontal" >
+        <div class="col-sm-8">
+            <div class="col-sm-offset-5">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">ID</span>
+                    <input class="form-control" type="text" name="Sub_Name" value="@ViewBag.Info.id_number" disabled />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-offset-5">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Họ Và Tên</span>
+                    <input class="form-control" type="text" name="Sub_Name" value="@ViewBag.Info.sub_name @ViewBag.Info.name" disabled />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="col-sm-8">
+            <div class="col-sm-offset-5">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Mật Khẩu Hiện Tại:</span>
+                    <input class="form-control" type="password" id="pass" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-offset-5">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Mật Khẩu Mới:</span>
+                    <input class="form-control" name="Password" type="password" id="a" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-offset-5"> 
+                <p style="color:red" id="valid-password" ></p>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Xác Nhận Mật Khẩu:</span>
+                    <input class="form-control" type="password" id="b" onchange="pass_confirm()" />
+                </div>
+            </div>
+        </div>
+        <div class="help-block with-errors"></div>
+        <div class="col-sm-8">
+            <input type="submit" name="name" value="Cập Nhật" class="btn btn-info" id="capnhat"  />
+        </div>    
+    </form>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('capnhat').on('submit', function () {
+            pass_confirm();
+        })
+    });
+</script>

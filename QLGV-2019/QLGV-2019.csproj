@@ -168,7 +168,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ConnectNeo4J.cs" />
     <Compile Include="Models\Degree.cs" />
@@ -282,6 +281,8 @@
     <Content Include="Views\Subject\CreateSpecialized.cshtml" />
     <Content Include="Views\Member\CreateTranscript.cshtml" />
     <Content Include="Views\Student\RegisterSubject.cshtml" />
+    <Content Include="Views\Account\UpdateInfo.cshtml" />
+    <Content Include="Views\Home\GiangVienInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

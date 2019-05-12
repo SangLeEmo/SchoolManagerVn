@@ -9,7 +9,7 @@ namespace QLGV_2019.Action
     public class TeacherAction
     {
         /* CREATE */
-        public static void Add_Teacher(string Id, string First_Name, string Last_Name, string Email, string Phone, string Date_Of_Birth, string Address, string Degree, string Major_Name, string Class_Name)
+        public static void Add_Teacher(string Id, string First_Name, string Last_Name, string Email, string Phone, string Date_Of_Birth, string Address, string Degree, string Major_Name)
         {
             var client = ConnectNeo4J.Connection();
             var student = new Teacher { id = Id, first_name = First_Name, last_name = Last_Name, email = Email, phone = Phone, date_of_birth = Date_Of_Birth, address = Address, degree = Degree };
@@ -18,11 +18,10 @@ namespace QLGV_2019.Action
                 Where((Teacher a) => a.id == Id).
                 AndWhere((User b) => b.id_number == Id).
                 Create("(a)-[:Owned]->(b)").ExecuteWithoutResults();
-            client.Cypher.Match("(a:Teacher)", "(b:Major)", "(c:Class)").
+            client.Cypher.Match("(a:Teacher)", "(b:Major)").
                 Where((Teacher a) => a.id == Id).
                 AndWhere((Major b) => b.name == Major_Name).
-                AndWhere((Class c) => c.id == Class_Name).
-                Create("(c)-[:Teach_Class]->(a)<-[:Teacher_In_Major]-(b)").ExecuteWithoutResults();
+                Create("(a)<-[:Teacher_In_Major]-(b)").ExecuteWithoutResults();
         }
 
         /* UPDATE */
@@ -51,21 +50,20 @@ namespace QLGV_2019.Action
 
 
 
-        public static List<Tuple<Teacher, Class, Major>> ShowAll()
+        public static List<Tuple<Teacher, Major>> ShowAll()
         {
-            List<Tuple<Teacher, Class, Major>> lst = new List<Tuple<Teacher, Class, Major>>();
-            Tuple<Teacher, Class, Major> tup;
+            List<Tuple<Teacher, Major>> lst = new List<Tuple<Teacher,  Major>>();
+            Tuple<Teacher,  Major> tup;
             var client = ConnectNeo4J.Connection();
-            var tmp = client.Cypher.Match("(a:Class)-[:Teach_Class]->(b:Teacher)<-[:Teacher_In_Major]-(c:Major)").
-                Return((a, b, c) => new {
-                    Class = a.As<Class>(),
-                    Teacher = b.As<Teacher>(),
-                    Major = c.As<Major>()
+            var tmp = client.Cypher.Match("(a:Teacher)<-[:Teacher_In_Major]-(b:Major)").
+                Return((a, b) => new {
+                    Teacher = a.As<Teacher>(),
+                    Major = b.As<Major>()
                 }).Results;
             
             foreach(var item in tmp)
             {
-                tup = new Tuple<Teacher, Class, Major>(item.Teacher, item.Class, item.Major);
+                tup = new Tuple<Teacher, Major>(item.Teacher, item.Major);
                 lst.Add(tup);
             }
             return lst;

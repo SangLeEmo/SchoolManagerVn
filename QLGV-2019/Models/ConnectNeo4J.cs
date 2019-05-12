@@ -16,7 +16,6 @@ namespace QLGV_2019.Models
         {
             //Host_Name = "bolt://localhost:7687";
             //User_Name = "neo4j";
-            ////Password = "qlgvneo4j"; // mật khẩu xài chung local
             //Password = "nghia7111998";
 
             //sanboxNeo4j

@@ -11,20 +11,15 @@ namespace QLGV_2019.Action
     public class SubjectAction
     {
         /* CREATE */
-        public static void Add_Subject(string Id,string Sub_name, int Numb_Credit, int Numb_Theory, int Numb_Practice, double Theory_Percent, int Numb_Student, string Specialized_Name,string Class_Name, string Teacher_Name)
+        public static void Add_Subject(string Id,string Sub_name, int Numb_Credit, int Numb_Theory, int Numb_Practice, double Theory_Percent, int Numb_Student, string Class_Name, string Teacher_Name, int Year_Term)
         {
             var client = ConnectNeo4J.Connection();
             var subject = new Subject {id = Id, sub_name = Sub_name, numb_credit = Numb_Credit, numb_theory = Numb_Theory, numb_practice = Numb_Practice, theory_percent = Theory_Percent, numb_student = Numb_Student ,isDelete = false };
             client.Cypher.Create("(:Subject {subject})").WithParam("subject", subject).ExecuteWithoutResultsAsync().Wait();
-            client.Cypher.Match("(a:Subject)", "(b:Specialized)", "(c:Class)").
-                Where((Subject a) => a.id == Id).
-                AndWhere((Specialized b) => b.name == Specialized_Name).
-                AndWhere((Class c) => c.id == Class_Name).
-                Create("(b)-[:Subject_Specialized]->(a)<-[:Subject_Class]-(c)").ExecuteWithoutResults();
-            client.Cypher.Match("(a:Subject)", "(b:Teacher)").
-                Where((Subject a) => a.id == Id).
-                AndWhere((Teacher b) => b.id == Teacher_Name).
-                Create("(a)-[:Subject_Teacher]->(b)").ExecuteWithoutResults();
+            client.Cypher.Match("(a:Subject)", "(b:YearTerm)").Where((Subject a) => a.id == Id).
+                AndWhere((YearTerm b) =>  b.year_term == Year_Term).
+                Create("(a)<-[:Subject_YearTerm]-(b)").ExecuteWithoutResults();
+            RegisterSubjectAction.Regist_Subject(Id, Class_Name, Teacher_Name);
         }
 
 
@@ -57,41 +52,42 @@ namespace QLGV_2019.Action
         }
 
 
-        public static List<Tuple<Class, Subject, Specialized, Major, Teacher>> ShowAll()
+        public static List<Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher>> ShowAll()
         {
-            List<Tuple<Class, Subject, Specialized, Major, Teacher>> lst = new List<Tuple<Class, Subject, Specialized, Major, Teacher>>();
-            Tuple<Class, Subject, Specialized, Major, Teacher> tup;
+
+            List<Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher>> lst_subject = new List<Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher>>();
+            Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher> tup_subject;
             var client = ConnectNeo4J.Connection();
-            var tmp = client.Cypher.
-                Match("(a:Teacher)<-[:Subject_Teacher]-(b:Subject)<-[:Subject_Class]-(c:Class)<-[:Class_In_Specialized]-(d:Specialized)<-[:Belong_Specialized]-(e:Major)").
-                Return((a, b, c, d, e) => new {
-                    Class = c.As<Class>(),
-                    Subject = b.As<Subject>(),
-                    Specialized = d.As<Specialized>(),
-                    Major = e.As<Major>(),
-                    Teacher = a.As<Teacher>()
+            var tmp = client.Cypher.Match("(a)<-[:Subject_YearTerm]-(b)", "(c)-[:Subject_Regist]->(d:RegisterSubject)").
+                Return((a,b,d) => new {
+                    Subject = a.As<Subject>(),
+                    YearTerm = b.As<YearTerm>(),
+                    RegisterSubject = d.As<RegisterSubject>()
+
                 }).Results;
-            foreach (var item in tmp)
+            foreach(var item in tmp)
             {
-                tup = new Tuple<Class, Subject, Specialized, Major, Teacher>(item.Class, item.Subject, item.Specialized, item.Major, item.Teacher);
-                lst.Add(tup);
+                tup_subject = new Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher>(item.Subject, item.YearTerm, item.RegisterSubject, ClassAction.Find(item.RegisterSubject.id_class), TeacherAction.Find(item.RegisterSubject.id_teacher));
+                lst_subject.Add(tup_subject);
             }
-            return lst;
+
+            return lst_subject;
 
         }
 
 
-        public static void CreateRelate(string Id,string Class_Name, string Teacher_Name)
+        public static void CreateRelate(string Id,string Class_Name, string Teacher_Name, int School_Year)
         {
-            var client = ConnectNeo4J.Connection();
-            client.Cypher.Match("(a:Subject)", "(b:Class)").
-                Where((Subject a) => a.id == Id).
-                AndWhere((Class b) => b.id == Class_Name).
-                Create("(a)<-[:Subject_Class]-(c)").ExecuteWithoutResults();
-            client.Cypher.Match("(a:Subject)", "(b:Teacher)").
-               Where((Subject a) => a.id == Id).
-               AndWhere((Teacher b) => b.id == Teacher_Name).
-               Create("(a)-[:Subject_Teacher]->(b)").ExecuteWithoutResults();
+            //var client = ConnectNeo4J.Connection();
+            //client.Cypher.Match("(a:Subject)", "(b:Class)").
+            //    Where((Subject a) => a.id == Id).
+            //    AndWhere((Class b) => b.id == Class_Name).
+            //    Create("(a)<-[:Subject_Class]-(b)").ExecuteWithoutResults();
+            //client.Cypher.Match("(a:Class)", "(b:Teacher)").
+            //   Where((Class a) => a.id == Class_Name).
+            //   AndWhere((Teacher b) => b.id == Teacher_Name).
+            //   Create("(a)<-[:Class_Teacher]-(b)").ExecuteWithoutResults();
+            RegisterSubjectAction.Regist_Subject(Id, Class_Name, Teacher_Name);
         }
 
 

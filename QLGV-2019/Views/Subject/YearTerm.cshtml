@@ -6,39 +6,78 @@
 
 <div class="container text-center">
     <h3>CREATE YEAR TERM</h3>
+    <br /><br />
     <form action="~/Subject/YearTerm" method="post" class="form-horizontal">
-        <div class="form-group">
-            <label class="control-label col-sm-3">Year Term:</label>
-            <select name="Year_Term">
-                <option value=""></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-2">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Năm Học:</span>
+                    <input class="form-control" type="number" name="School_year" value="" min="2000" required />
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        
+            <div class="col-sm-2">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Học Kì:</span>
+                    <select name="Year_Term" class="form-control" required>
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+        
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Year:</label>
-            <select name="School_Year">
-                <option value=""></option>
-                @if(ViewBag.YearTerm != null)
-                {
-                    foreach(var item in ViewBag.YearTerm)
-                    {
-                        <option value="@item.school_year">@item.school_year</option>
-                    }
-                }
-            </select>
+        
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Ngày Bắt Đầu:</span>
+                    <input type="date" name="Day_Start" value="" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-3">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">Ngày Kết Thúc:</span>
+                    <input type="date" name="Day_End" value="" class="form-control" required/>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Date Start:</label>
-            <input type="text" name="Day_Start" value="" />
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Date End:</label>
-            <input type="text" name="Day_End" value="" />
-        </div>
-        <input type="submit" name="name" value="Create" />
+
+        <input type="submit" name="name" value="Create" class="btn btn-info" />
     </form>
+</div>
+<br />
+<hr />
+<br />
+<div>
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th class="text-center">Học Kì</th>
+            <th class="text-center">Ngày Bắt Đầu</th>
+            <th class="text-center">Ngày Kết Thúc</th>
+        </tr>
+        @if(ViewBag.YearTerm != null)
+        {
+            foreach(var item in ViewBag.YearTerm)
+            {
+                <tr>
+                    <td class="text-center">@item.year_term</td>
+                    <td class="text-center">@item.day_start</td>
+                    <td class="text-center">@item.day_end</td>
+                </tr>
+            }
+        }
+    </table>
 </div>
 

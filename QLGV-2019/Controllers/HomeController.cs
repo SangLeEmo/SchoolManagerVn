@@ -14,17 +14,6 @@ namespace QLGV_2019.Controllers
     {
         public ActionResult Index()
         {
-            //var client = new BoltGraphClient(new Uri("bolt://localhost:7687"), "neo4j", "nghia7111998");
-            //{
-            //    var JsonContractResolver = new CamelCasePropertyNamesContractResolver();
-            //};
-            //client.Connect();
-            //client.Cypher.Match("(sv:SinhVien)", "(nganh:NganhHoc)")
-            //    .Where((SinhVien sv, NganhHoc nganh) => sv.nganh_hoc == nganh.nganh_hoc)
-            //    .Create("(sv)-[:Nganh_Hoc]->(nganh)")
-            //    .ExecuteWithoutResultsAsync()
-            //    .Wait();
-
             return View();
         }
 
@@ -110,7 +99,20 @@ namespace QLGV_2019.Controllers
         public ActionResult ThongTinCaNhan()
         {
 
-            return View();
+            if ((string)Session["role"] == "Student")
+            {
+                var tmp = StudentAction.ShowAll();
+                for(int i = 0; i < tmp.Count; i++)
+                {
+                    if(tmp[i].Item1.id == (string)Session["id"])
+                    {
+                        ViewBag.SV = tmp[i];
+                        break;
+                    }
+                }
+                return View();
+            }
+            return Redirect("~/Home/Index");
         }
 
         [HttpGet]
@@ -120,18 +122,32 @@ namespace QLGV_2019.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public ActionResult UpdateSchoolYear()
-        //{
-
-        //    return View();
-        //}
-
         [HttpGet]
         public ActionResult DangKyMonHoc()
         {
 
             return View();
         }
+        
+
+        public ActionResult GiangVienInfo()
+        {
+            if ((string)Session["role"] == "Teacher")
+            {
+                var tmp = TeacherAction.ShowAll();
+                for (int i = 0; i < tmp.Count; i++)
+                {
+                    if (tmp[i].Item1.id == (string)Session["id"])
+                    {
+                        ViewBag.Gv = tmp[i];
+                        break;
+                    }
+                }
+                return View();
+            }
+            return Redirect("~/Home/Index");
+        }
+
+
     }
 }

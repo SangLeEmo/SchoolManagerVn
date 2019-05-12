@@ -1,4 +1,5 @@
-﻿
+﻿@using QLGV_2019.Models;
+@using System.Collections.Generic;
 @{
     ViewBag.Title = "Teacher";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,399 +17,36 @@
             </button>
         </span>
     </div>
-    <div class="form-group pull-right">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalGV">
-            <span class="glyphicon glyphicon-plus"></span> Thêm
-        </button>
-    </div>
 </div>
-<hr class="body-content"/>
+<hr class="body-content" />
 <div class="table-responsive scrollvert">
     <table class="table table-striped">
         <thead class="bg-info">
             <tr>
                 <th>STT</th>
-                <th>Mã giảng viên</th>
-                <th>Lớp cố vấn</th>
+                <th>Mã Giảng Viên</th>
+                <th>Họ Và Tên</th>
                 <th>Khoa</th>
-                <th>Họ và tên</th>
-                <th>Ngày sinh</th>
-                <th>Quê quán</th>
-                <th>Liên lạc</th>
+                <th>Mail</th>
+                <th>Liên Lạc</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>GV1026</td>
-                <td>PM1604</td>
-                <td>CNTT</td>
-                <td>Nguyễn Khá Bảnh</td>
-                <td>17/05/1998</td>
-                <td>Hồ chí minh</td>
-                <td>Banh@Gmail.com</td>
-            </tr>
+            @if (ViewBag.GV != null)
+            {
+                List<Tuple<Teacher, Class, Major>> item = ViewBag.GV;
+                for (int i = 0; i < item.Count; i++)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item[i].Item1.id</td>
+                        <td>@item[i].Item1.last_name @item[i].Item1.first_name</td>
+                        <td>@item[i].Item3.name</td>
+                        <td>@item[i].Item1.email</td>
+                        <td>@item[i].Item1.phone</td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>
-
-<!--Modal giang vien-->
-<div class="modal" id="modalGV" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Thêm giảng viên mới</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Mã giảng viên <span class="glyphicon glyphicon-user"></span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="idGV" placeholder="Nhập mã giảng viên" name="idgv">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Lớp cố vấn <span class="glyphicon glyphicon-th-list"></span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="classes" placeholder="Nhập lớp cố vấn" name="classes">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Khoa <span class="glyphicon glyphicon-briefcase"></span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="faculty" placeholder="Nhập khoa" name="faculty">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Họ và tên <span class="glyphicon glyphicon-pencil"></span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Ngày sinh <span class="glyphicon glyphicon-calendar"></span></label>
-                        <div class="col-md-8">
-                            <input type="date" class="form-control" id="bDay" placeholder="Nhập ngày sinh" name="bDay">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4">Quê quán <span class="glyphicon glyphicon-tree-conifer"></span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="POB" placeholder="Nhập quê quán" name="POB">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-4" for="email">Liên lạc <span class="glyphicon glyphicon-earphone"></span></label>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control" id="contact" placeholder="Nhập địa chỉ liên lạc" name="contact">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger pull-left">
-                    <span class="glyphicon glyphicon-trash"></span> Xóa
-                </button>
-
-                <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-save"></span> Lưu
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-@*<h2>Thêm giảng viên mới</h2>
-<form class="form-horizontal">
-    <div class="form-group">
-        <label class="control-label col-sm-2">Mã giảng viên <span class="glyphicon glyphicon-user"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="idGV" placeholder="Nhập mã giảng viên" name="idgv">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Lớp cố vấn <span class="glyphicon glyphicon-th-list"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="classes" placeholder="Nhập lớp cố vấn" name="classes">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Khoa <span class="glyphicon glyphicon-briefcase"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="faculty" placeholder="Nhập khoa" name="faculty">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Họ và tên <span class="glyphicon glyphicon-pencil"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="name">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Ngày sinh <span class="glyphicon glyphicon-calendar"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="bDay" placeholder="Nhập ngày sinh" name="bDay">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Quê quán <span class="glyphicon glyphicon-tree-conifer"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="POB" placeholder="Nhập quê quán" name="POB">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="email">Liên lạc <span class="glyphicon glyphicon-earphone"></span></label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="contact" placeholder="Nhập địa chỉ liên lạc" name="contact">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label><input type="checkbox" name="confirm">Xác nhận thông tin trên chính xác</label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-info">
-                <span class="glyphicon glyphicon-user"></span> Thêm
-            </button>
-        </div>
-    </div>
-</form>*@

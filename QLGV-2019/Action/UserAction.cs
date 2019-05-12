@@ -1,9 +1,11 @@
-﻿    using Neo4jClient;
+﻿using Neo4jClient;
 using Newtonsoft.Json.Serialization;
 using QLGV_2019.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace QLGV_2019.Action
@@ -11,24 +13,22 @@ namespace QLGV_2019.Action
     public class UserAction
     {
         /* CREATE */
-        public static void Add_User(string Sub_Name, string Name, string Role, string Password, string Bday, string Email, string Phone, string Address)
+        public static void Add_User(string Id_Number, string Sub_Name, string Name, string Password,string Role)
         {
             var client = ConnectNeo4J.Connection();
-            int user_id = client.Cypher.Match("(usr:User)").Return<int>("count(usr)").Results.FirstOrDefault<int>();
-            var user = new User {userID = user_id + 1,sub_name = Sub_Name, name = Name, bday = Bday, email = Email, phone = Phone, address = Address};
+            var user = new User {id_number = Id_Number, sub_name = Sub_Name, name = Name, password = MD5Hash(Password), status = "none", role = Role, isDelete = false };
             client.Cypher.Create("(:User {user})").WithParam("user", user).ExecuteWithoutResultsAsync().Wait();
         }
 
         /* UPDATE */
-        public static void Edit_User(int User_id, string Sub_Name, string Name)
+        public static void Edit_User(string Id_Number, string Password)
         {
             var client = ConnectNeo4J.Connection();
-            var tmp = new User {userID = User_id, sub_name = Sub_Name, name = Name};
             client.Cypher
                 .Match("(user:User)")
-                .Where((User user) => user.userID)
-                .Set("user = {tmp}")
-                .WithParam("tmp", tmp).ExecuteWithoutResultsAsync();
+                .Where((User user) => user.id_number == Id_Number)
+                .Set("user.password = {tmp}")
+                .WithParam("tmp", MD5Hash(Password)).ExecuteWithoutResultsAsync();
         }
 
         /* SEARCH */
@@ -54,8 +54,39 @@ namespace QLGV_2019.Action
         {
             User user = null;
             var client = ConnectNeo4J.Connection();
-            user = client.Cypher.Match("(a:User)").Where("a.id_number = {ID}").WithParam("ID", Id_Number).AndWhere("a.password = {Pass}").WithParam("Pass", Password).Return<User>("a").Results.SingleOrDefault();
+            user = client.Cypher.Match("(a:User)").Where("a.id_number = {ID}").WithParam("ID", Id_Number).AndWhere("a.password = {Pass}").WithParam("Pass", MD5Hash(Password)).Return<User>("a").Results.SingleOrDefault();
             return user;
+        }
+
+
+        public static int CountUser()
+        {
+            var client = ConnectNeo4J.Connection();
+            var cnt = client.Cypher.Match("(a:User)").Return<int>("count(a)").Results.FirstOrDefault<int>();
+            return cnt;
+        }
+
+
+        public static string MD5Hash(string text)//Ma hoa MD5
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text  
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+
+            //get hash result after compute it  
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits  
+                //for each byte  
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+
+
+            return strBuilder.ToString();
         }
 
     }

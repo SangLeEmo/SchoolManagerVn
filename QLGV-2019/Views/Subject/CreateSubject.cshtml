@@ -3,6 +3,8 @@
     ViewBag.Title = "CreateSubject";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/teacher.js"></script>
+
 
 <div class="container text-center" >
     <h3>Create Subject</h3>
@@ -147,10 +149,30 @@
                 </div>
             </div>
 
+            <div class="col-sm-1"></div>
+
+            <div>
+                <div class="col-sm-2">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Học Kì</span>
+                        <select class="form-control" required name="Year_Term" id="Year_Term">
+                            <option value=""></option>
+                            @if(ViewBag.YearTerm != null)
+                            {
+                                foreach(var item in ViewBag.YearTerm)
+                                {
+                                    <option value="@item.year_term">@item.year_term</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <br />
         <input type="submit" name="name" value="Create" class="btn btn-info" />
-        <input type="reset" name="name" value="Clear" class="btn btn-info" />
+        
     </form>
 </div>
 <hr />
@@ -163,30 +185,30 @@
             <th>Mã Môn Học</th>
             <th>Tên Môn Học</th>
             <th>Lớp</th>
-            <th>Chuyên Ngành</th>
+            @*<th>Chuyên Ngành</th>*@
             <th>Giảng Viên</th>
             <th>Số Tín Chỉ</th>
-            <th>Tiết Lý Thuyết</th>
+            @*<th>Tiết Lý Thuyết</th>
             <th>Tiết Thực Hành</th>
-            <th>Hệ Số Lý Thuyết</th>
+            <th>Hệ Số Lý Thuyết</th>*@
             <th>Sĩ Số</th>
+            <th>Ngày Bắt Đầu</th>
+            <th>Ngày Kết Thúc</th>
         </tr>
         @if(ViewBag.MH != null)
         {
-            List<Tuple<Class, Subject, Specialized, Major, Teacher>> tmp = ViewBag.MH;
+            List<Tuple<Subject, YearTerm, RegisterSubject, Class, Teacher>> tmp = ViewBag.MH;
             for(int i = 0; i < tmp.Count; i++)
             {
                 <tr>
-                    <td>@tmp[i].Item2.id</td>
-                    <td>@tmp[i].Item2.sub_name</td>
                     <td>@tmp[i].Item1.id</td>
-                    <td>@tmp[i].Item3.name</td>
+                    <td>@tmp[i].Item1.sub_name</td>
+                    <td>@tmp[i].Item4.id</td>
                     <td>@tmp[i].Item5.last_name @tmp[i].Item5.first_name</td>
-                    <td>@tmp[i].Item2.numb_credit</td>
-                    <td>@tmp[i].Item2.numb_theory</td>
-                    <td>@tmp[i].Item2.numb_practice</td>
-                    <td>@tmp[i].Item2.theory_percent</td>
-                    <td>@tmp[i].Item2.numb_student</td>
+                    <td>@tmp[i].Item1.numb_credit</td>
+                    <td>@tmp[i].Item1.numb_student</td>
+                    <td>@tmp[i].Item2.day_start</td>
+                    <td>@tmp[i].Item2.day_end</td>
                 </tr>
             }
         }

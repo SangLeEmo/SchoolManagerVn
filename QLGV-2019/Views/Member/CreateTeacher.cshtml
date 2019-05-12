@@ -5,8 +5,153 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/teacher.js"></script>
+<div class="form-inline">
+    <label for="search">Tra cứu giảng viên:</label>
+    <div class="form-group input-group">
+        <input type="search" class="form-control" id="Search" placeholder="Ví dụ:201801...">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-info">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </span>
+    </div>
+    <div class="form-group pull-right">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalGV">
+            <span class="glyphicon glyphicon-plus"></span> Thêm
+        </button>
+    </div>
+</div>
+<div class="modal" id="modalGV" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tạo giảng viên</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="~/Member/CreateTeacher" method="post">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            ID Teacher
+                            <span class="glyphicon glyphicon-user"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <select name="Id" class="form-control" onclick="fill_in_form()" id="Id">
+                                <option value=""></option>
+                                @if (ViewBag.Account != null)
+                                {
+                                    foreach (var item in ViewBag.Account)
+                                    {
+                                        <option value="@item.id_number">@item.id_number</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
 
-<div class="container text-center">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            First Name  <span class="glyphicon glyphicon-pencil"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" name="First_Name" class="form-control" value="" id="First_Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Last Name  <span class="glyphicon glyphicon-pencil"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" name="Last_Name" class="form-control" value="" id="Last_Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Ngành <span class="glyphicon glyphicon-briefcase"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="Major_Name">
+                                <option value=""></option>
+                                @if (ViewBag.Nganh != null)
+                                {
+                                    foreach (var item in ViewBag.Nganh)
+                                    {
+                                        <option value="@item.name">@item.name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Date <span class="glyphicon glyphicon-calendar"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="date" name="Date_Of_Birth" class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Phone <span class="glyphicon glyphicon-earphone"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="number" name="Phone" class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Email  <span class="glyphicon glyphicon-inbox"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" name="Email" class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">
+                            Address <span class="glyphicon glyphicon-tree-conifer"></span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" name="Address" class="form-control" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Degree  <span class="glyphicon glyphicon-education"></span></label>
+                        <div class="col-md-8">
+                            <select name="Degree" class="form-control">
+                                <option value=""></option>
+                                <option value="Cử Nhân">Cử Nhân</option>
+                                <option value="Thạc Sĩ">Thạc Sĩ</option>
+                                <option value="Tiến Sĩ">Tiến Sĩ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" value="Create">
+                        <span class="glyphicon glyphicon-save"></span> Lưu
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-danger pull-left">
+                    <span class="glyphicon glyphicon-trash"></span> Xóa
+                </button>*@
+
+                
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container text-center">
     <h3>Create Teacher</h3>
     <br />
     <form action="~/Member/CreateTeacher" method="post" class="form-horizontal">
@@ -131,42 +276,46 @@
 
         <input type="submit" name="name" value="Create" class="btn btn-info" />
     </form>
-</div>
+</div>*@
 
-<hr /><hr />
+<hr />
 <div class="container text-center">
-    <h3>Teacher List</h3><br />
-    <table class="table table-bordered table-responsive">
-        <tr>
-            <th>Mã Giảng Viên</th>
-            <th>Họ Và Tên</th>
-            <th>Khoa</th>
-            <th>Lớp Cố Vấn</th>
-            <th>Quê Quán</th>
-            <th>Mail</th>
-            <th>Liên Lạc</th>
-            <th>Thao Tác</th>
-        </tr>
-        @if (ViewBag.GV != null)
-        {
-            List<Tuple<Teacher, Class, Major>> item = ViewBag.GV;
-            for (int i = 0; i < item.Count; i++)
-            {
+    <h3>Danh sách Giảng viên</h3><br />
+    <div class="table-responsive scrollvert">
+        <table class="table table-bordered table-striped">
+            <thead class="bg-info">
                 <tr>
-                    <td>@item[i].Item1.id</td>
-                    <td>@item[i].Item1.last_name @item[i].Item1.first_name</td>
-                    <td>@item[i].Item3.name</td>
-                    <td>@item[i].Item2.id</td>
-                    <td>@item[i].Item1.address</td>
-                    <td>@item[i].Item1.email</td>
-                    <td>@item[i].Item1.phone</td>
-                    <td>
-                        <a href="#" class="btn btn-warning">Update</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                    </td>
+                    <th>Mã Giảng Viên</th>
+                    <th>Họ Và Tên</th>
+                    <th>Khoa</th>
+                    <th>Quê Quán</th>
+                    <th>Mail</th>
+                    <th>Liên Lạc</th>
+                    <th>Thao Tác</th>
                 </tr>
-            }
-
-        }
-    </table>
+            </thead>            
+            <tbody>
+                @if (ViewBag.GV != null)
+                {
+                    List<Tuple<Teacher, Major>> item = ViewBag.GV;
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        <tr>
+                            <td>@item[i].Item1.id</td>
+                            <td>@item[i].Item1.last_name @item[i].Item1.first_name</td>
+                            <td>@item[i].Item2.name</td>
+                            <td>@item[i].Item1.address</td>
+                            <td>@item[i].Item1.email</td>
+                            <td>@item[i].Item1.phone</td>
+                            <td>
+                                <a href="#" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    
 </div>

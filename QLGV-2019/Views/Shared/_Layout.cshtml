@@ -20,11 +20,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="~/Images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="~/Images/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/Images/favicon-16x16.png">
-    <link rel="manifest" href="~/manifest.json">
+    
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="~/Images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -53,31 +52,59 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Năm học", "AllSchoolYear", "Home")</li>
-                                <li>@Html.ActionLink("Tạo năm học", "CreateSchoolYear", "Home")</li>
-                                <li>@Html.ActionLink("Cập nhật năm học", "UpdateSchoolYear", "Home")</li>
-                                <li>@Html.ActionLink("Điểm", "Marks", "Home")</li>
-                                <li>@Html.ActionLink("Phân công", "Phancong", "Home")</li>
-                                <li>@Html.ActionLink("Tạo Môn học", "ThongTinMonHoc", "Home")</li>
+                                <li>
+                                    <a href="~/Subject/CreateClass">Lớp</a>
+                                </li>
+                                <li>
+                                    <a href="~/Subject/CreateSpecialized">Chuyên Ngành</a>
+                                </li>
+                                <li>
+                                    <a href="~/Member/CreateTranscript">Điểm</a>
+                                </li>
+                                <li>
+                                    <a href="~/Subject/YearTerm">Học Kì</a>
+                                </li>
+                                <li>
+                                    <a href="~/Subject/CreateSubject">Tạo Môn Học</a>
+                                </li>
                             </ul>
                         </li>
-
-
-                        <li>@Html.ActionLink("Sinh viên", "Student", "Home")</li>
-                        <li>@Html.ActionLink("Giảng viên", "Teacher", "Home")</li>
-
-
-
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Tài Khoản
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="~/Account/Register">Tạo Tài Khoản</a>
+                                </li>
+                                <li>
+                                    <a href="~/Member/CreateStudent">Sinh Viên</a>
+                                </li>
+                                <li>
+                                    <a href="~/Member/CreateTeacher">Giảng Viên</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
                     </ul>
                 }
                 @if (Session["id"] != null && (string)Session["role"] == "Student")
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Trang chính", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Đăng ký môn học", "DangKyMonHoc", "Home")</li>
+                        <li>
+                            <a href="~/Student/RegisterSubject">Đăng Kí Môn Học</a>
+                        </li>
                         <li>@Html.ActionLink("Danh sách học phần", "DanhSachHocPhan", "Home")</li>
                         <li>@Html.ActionLink("Thông tin cá nhân", "ThongTinCaNhan", "Home")</li>
-                        <li>@Html.ActionLink("Thông tin", "About", "Home")</li>
-                        <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                    </ul>
+                }
+                @if (Session["id"] != null && (string)Session["role"] == "Teacher")
+                {
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="~/Home/GiangVienInfo">Thông Tin Cá Nhân</a>
+                        </li>
                     </ul>
                 }
                 @if (Session["id"] == null)
@@ -106,7 +133,7 @@
                             <a style="color:red">Xin Chào @Session["name"]  (@Session["id"])</a>
                         </li>
                         <li>
-                            <a style="color:red" href="#">Thay Đổi Mật Khẩu</a>
+                            <a style="color:red" href="~/Account/UpdateInfo">Thay Đổi Mật Khẩu</a>
                         </li>
                         <li>
                             <a href="~/Account/Logout">Logout</a>

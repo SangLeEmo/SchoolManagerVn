@@ -1,10 +1,11 @@
 ﻿@using QLGV_2019.Models;
 @{
-    ViewBag.Title = "ThongTinCaNhan";
+    ViewBag.Title = "GiangVienInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    Tuple<Student, Major, Specialized, Class> item = new Tuple<Student, Major, Specialized, Class>(ViewBag.SV.Item1, ViewBag.SV.Item2, ViewBag.SV.Item3, ViewBag.SV.Item4);
+
+@{ 
+    Tuple<Teacher, Major> item = new Tuple<Teacher, Major>(ViewBag.GV.Item1, ViewBag.GV.Item2);
 }
 <div class="container text-center">
     <h3>Thông Tin Cá Nhân</h3>
@@ -14,7 +15,7 @@
             <div class="col-sm-5">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Họ Và Tên</span>
-                    <input class="form-control"  value="@item.Item1.last_name @item.Item1.first_name" disabled />
+                    <input class="form-control" value="@item.Item1.last_name @item.Item1.first_name" disabled />
                 </div>
             </div>
             <div class="col-sm-2"></div>
@@ -49,22 +50,6 @@
                     <input class="form-control" value="@item.Item2.name" disabled />
                 </div>
             </div>
-            <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <div class="form-group input-group">
-                    <span class="input-group-addon">Lớp</span>
-                    <input class="form-control" value="@item.Item4.id" disabled />
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="form-group input-group">
-                    <span class="input-group-addon">Chuyên Ngành</span>
-                    <input class="form-control" value="@item.Item3.name" disabled />
-                </div>
-            </div>
         </div>
 
         <div class="row">
@@ -78,4 +63,3 @@
 
     </div>
 </div>
-

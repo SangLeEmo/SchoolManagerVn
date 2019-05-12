@@ -9,10 +9,10 @@ namespace QLGV_2019.Action
     public class StudentAction
     {
         /* CREATE */
-        public static void Add_Student(string IdLogin, string password, bool status)
+        public static void Add_Student(string Id, string First_Name, string Last_Name, string Email, string Phone, string Date_Of_Birth, string Address, string Major_Name, string Specialized_Name ,string Class_Name)
         {
             var client = ConnectNeo4J.Connection();
-            var student = new Student { id = Id, password };
+            var student = new Student { id = Id, first_name = First_Name, last_name = Last_Name, email = Email, phone = Phone, date_of_birth = Date_Of_Birth, address = Address};
             client.Cypher.Create("(:Student {n})").WithParam("n", student).ExecuteWithoutResultsAsync().Wait();
             client.Cypher.Match("(a:Student)", "(b:User)").
                 Where((Student a) => a.id == Id).
@@ -82,14 +82,22 @@ namespace QLGV_2019.Action
                 Create("(a)<-[:Student_Subject]-(b)").ExecuteWithoutResults();
         }
 
-        public static List<Tuple<Student, Subject, Class>> GetAllSubject()
+        public static List<Tuple<RegisterSubject, Student>> GetAllSubject()
         {
-            List<Tuple<Student, Subject, Class>> lst = new List<Tuple<Student, Subject, Class>>();
-            Tuple<Student, Subject, Class> tup;
+            List<Tuple<RegisterSubject, Student>> lst = new List<Tuple<Models.RegisterSubject, Models.Student>>();
+            Tuple<RegisterSubject, Student> tup;
             var client = ConnectNeo4J.Connection();
-            var tmp = client.Cypher.Match("(a:Student)<-[:Student_Subject]-(b:Subject)<-[]-(c:)");
+            var tmp = client.Cypher.Match("(a:Student)<-[:Student_Regist_Subject]-(b)").
+                Return((a, b) => new {
+                    Student = a.As<Student>(),
+                    RegisterSubject = b.As<RegisterSubject>()
+                }).Results;
+            foreach(var item in tmp)
+            {
+                tup = new Tuple<RegisterSubject, Student>(item.RegisterSubject, item.Student);
+                lst.Add(tup);
+            }
             return lst;
-
         }
 
 

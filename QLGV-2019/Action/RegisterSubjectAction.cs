@@ -9,15 +9,29 @@ namespace QLGV_2019.Action
     public class RegisterSubjectAction
     {
         /* CREATE  */
-        public static void Regist_Subject(string Id_Subject, string Id_Class, string Id_Teacher, string Id_Student)
+        public static void Regist_Subject(string Id_Subject, string Id_Class, string Id_Teacher)
         {
             var client = ConnectNeo4J.Connection();
             var mh = new RegisterSubject { id_subject = Id_Subject, id_class = Id_Class, id_teacher = Id_Teacher};
             client.Cypher.Create("(:RegisterSubject {mh})").WithParam("mh", mh).ExecuteWithoutResultsAsync().Wait();
-            client.Cypher.Match("(a:Student)", "(b:RegisterSubject)").
-                Where((Student a) => a.id == Id_Student).
-                AndWhere((RegisterSubject b) => b.id_subject == Id_Subject).
-                Create("(a)<-[:Student_Regist_Subject]-(b)").ExecuteWithoutResults();
+
+            /* relation between subject -> register */
+            client.Cypher.Match("(a:Subject)", "(b:RegisterSubject)").
+                Where((Subject a) => a.id == Id_Subject).
+                AndWhere((RegisterSubject b) => b.id_subject == Id_Subject && b.id_class == Id_Class).
+                Create("(a)-[:Subject_Regist]->(b)").ExecuteWithoutResults();
+
+            /* relation between teacher -> register */
+            client.Cypher.Match("(a:Teacher)", "(b:RegisterSubject)").
+                Where((Teacher a) => a.id == Id_Teacher).
+                AndWhere((RegisterSubject b) => b.id_teacher == Id_Teacher).
+                Create("(a)<-[:Teacher_Subject]-(b)").ExecuteWithoutResults();
+
+            /* relation between class -> register */
+            client.Cypher.Match("(a:Class)", "(b:RegisterSubject)").
+                Where((Class a) => a.id == Id_Class).
+                AndWhere((RegisterSubject b) => b.id_class == Id_Class).
+                Create("(a)-[:Class_Regist]->(b)").ExecuteWithoutResults();
             client.Dispose();
         }
 
@@ -64,7 +78,6 @@ namespace QLGV_2019.Action
         }
 
 
-
         /* MAKE RELATION */
         public static void CreateRelate(string Id_Subject, string Id_Class ,string Id_Student)
         {
@@ -75,6 +88,7 @@ namespace QLGV_2019.Action
                 Create("(a)<-[:Student_Regist_Subject]-(b)").ExecuteWithoutResults();
             client.Dispose();
         }
+
 
     }
 }

@@ -6,7 +6,6 @@
   "display": "standalone",
   "theme_color": "#222222",
   "background_color": "#222222",
-  "serviceworker": {"src": "serviceworker.js"},
   "icons": [
     {
       "src": "Images/apple-icon-57x57.png",
